@@ -21,17 +21,20 @@
   <img src="https://source.unsplash.com/7bwQXzbF6KE/800x500">
 
   <style>
-
+     :root{
+        --spacing : 10px;
+        --blur: 0px;
+        --base: #ffc600;
+     }
     /*
       misc styles, nothing to do with CSS variables
     */
-
     body {
       text-align: center;
     }
 
     body {
-      background: #193549;
+      background: #000;
       color: white;
       font-family: 'helvetica neue', sans-serif;
       font-weight: 100;
@@ -45,10 +48,24 @@
     input {
       width:100px;
     }
+    img{
+      color: var(--base);
+      border: var(--spacing) solid;
+      filter: blur(var(--blur));
+    }
   </style>
 
   <script>
-  </script>
+   const inputs = document.querySelectorAll('.controls input');
+   function handleInput(){
+      const suffix = this.dataset.sizing || '';
+      const val = this.value+suffix;
+      document.documentElement.style.setProperty(`--${this.name}`, val);
+   }
+   inputs.forEach((el)=>{
+      el.addEventListener('input', handleInput);
+   })
 
+  </script>
 </body>
 </html>
